@@ -1,12 +1,25 @@
 {
-	"editor.formatOnSave": true,
-	"editor.formatOnPaste": true,
-	"editor.formatOnType": true,
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.tabSize": 2
-	},
-	"eslint.validate": [
-		"javascript"
-	]
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 使用Prettier作为默认格式化器
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  // 常见问题排查：
+  // 1. 确保文件已保存(Ctrl+S)
+  // 2. 检查ESLint和Prettier扩展是否启用
+  // 3. 重新加载VS Code窗口(Ctrl+Shift+P > Reload Window)
+  // 4. 检查输出面板中ESLint日志
+  // 文件类型特定配置
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
