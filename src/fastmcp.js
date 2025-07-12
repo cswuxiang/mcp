@@ -2,7 +2,7 @@ import { FastMCP } from "fastmcp";
 import { z } from "zod"; // Or any validation library that supports Standard Schema
 
 const server = new FastMCP({
-	name: "My Server",
+	name: "My mpv server",
 	version: "1.0.0",
 });
 
@@ -28,23 +28,53 @@ server.addTool({
 
 
 server.addTool({
-	name: "tap-test",
-	description: "查询tapd相关的内容",
+	name: "mpv-test",
+	description: "查询mpv相关的内容",
 	parameters: z.object({
-		a: z.number(),
-		b: z.number(),
+		id: z.string(),
 	}),
 	/**
-	 * 异步执行加法运算并返回字符串结果
+	 * 返回mpv相关的内容
 	 * @param {Object} args - 参数对象
-	 * @param {number} args.a - 加数a
-	 * @param {number} args.b - 加数b
-	 * @returns {Promise<string>} 两数之和的字符串表示
+	 * @param {string} args.id - tapd的id
+	 * @returns {Promise<string>} 返回tapd相关的内容
 	 */
 	execute: async (args) => {
-		console.log("Executing add tool with args:", args);
-		return String(args.a + args.b);
+		console.log("Executing mpv-test tool with args:", args);
+		return `标准化/小型化】【集测测试】【CLS】 单Uin下最大可创建机器组数  限制问题单	${args.id}`;
 	},
+});
+
+// 添加一个资源，返回系统状态
+server.addResource({
+  uri: "system://status",
+  name: "System Status",
+  mimeType: "text/plain",
+  async load() {
+    return {
+      text: "System operational",
+    };
+  },
+});
+
+/**
+ * 获取系统状态的工具
+
+ */
+server.addTool({
+  name: "get_system_status",
+  description: "Get current system status",
+  parameters: z.object({}),
+  execute: async () => {
+    return {
+      content: [
+        {
+          type: "resource",
+          resource: await server.embedded("system://status"),
+        },
+      ],
+    };
+  },
 });
 
 server.start({
