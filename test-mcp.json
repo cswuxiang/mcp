@@ -1,0 +1,19 @@
+{
+    "mcpServers": {
+        "mpv_mcp_http": {
+          "url": "http://localhost:8080/mcp",
+          "timeout": 20000,
+          "headers": {
+             "X-Tapd-Access-Token": "xxx"
+             },
+          "transportType": "streamable-http"
+        },
+        "sdk_mcp": {
+         "command": "npx",
+          "args": [
+          "-y",
+          "computer-use-mcp"
+          ]
+        }
+    }
+}
